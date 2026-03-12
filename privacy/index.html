@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Scuto</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 720px; margin: 0 auto; padding: 2rem 1rem; }
+    h1 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.5rem; }
+    p, li { margin-bottom: 0.75rem; font-size: 0.95rem; }
+    ul { padding-left: 1.5rem; }
+    a { color: #2563eb; }
+    .date { color: #666; font-size: 0.875rem; margin-bottom: 2rem; }
+    nav { margin-bottom: 2rem; font-size: 0.875rem; }
+    nav a { margin-right: 1rem; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Scuto</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+  </nav>
+
+  <h1>Privacy Policy</h1>
+  <p class="date">Last updated: March 12, 2026</p>
+
+  <p>Scuto ("we", "our", "the extension") is a Chrome extension that extracts structured data from web pages using AI. This policy explains what data we collect, how we use it, and your rights.</p>
+
+  <h2>1. Data We Collect</h2>
+  <ul>
+    <li><strong>Account information:</strong> email address (via Google Sign-In) for authentication and usage tracking.</li>
+    <li><strong>Usage data:</strong> daily extraction count, plan type, timestamps. Used for quota enforcement and analytics.</li>
+    <li><strong>Extraction schemas:</strong> if you save custom templates, the schema structure (field names and types) is stored. The actual extracted data is never stored on our servers.</li>
+    <li><strong>Feedback:</strong> category, URL, and message text you voluntarily submit.</li>
+  </ul>
+
+  <h2>2. Data We Do NOT Collect</h2>
+  <ul>
+    <li>Raw HTML or page content (processed in-memory, discarded after extraction)</li>
+    <li>Extracted results (returned to your browser, never stored server-side)</li>
+    <li>Browsing history or cookies</li>
+    <li>Personal data from visited pages (unless you disable Privacy Mode)</li>
+  </ul>
+
+  <h2>3. How We Process Page Data</h2>
+  <p>When you trigger an extraction:</p>
+  <ul>
+    <li>The extension reads the active tab's DOM locally in your browser.</li>
+    <li>HTML is cleaned and converted to Markdown (irreversible, no raw HTML sent).</li>
+    <li>If Privacy Mode is enabled, emails, phone numbers, and SSN-like patterns are replaced with placeholders before leaving your device.</li>
+    <li>The cleaned Markdown is sent to our backend, which forwards it to Google Gemini or Anthropic Claude for AI processing.</li>
+    <li>The structured result is returned to your browser. Neither our backend nor the AI providers store the page content after processing.</li>
+  </ul>
+
+  <h2>4. Third-Party Services</h2>
+  <ul>
+    <li><strong>Google (authentication):</strong> we use Google OAuth to verify your identity. Google's privacy policy applies to their authentication service.</li>
+    <li><strong>Stripe (billing):</strong> payment processing for Pro subscriptions. We do not store credit card numbers. Stripe's privacy policy applies.</li>
+    <li><strong>Google Gemini API:</strong> primary AI provider for data extraction. Content is processed per Google's API terms.</li>
+    <li><strong>Anthropic Claude API:</strong> fallback AI provider for complex extractions. Content is processed per Anthropic's API terms.</li>
+    <li><strong>Supabase:</strong> backend infrastructure (database, authentication, serverless functions) hosted in the EU.</li>
+  </ul>
+
+  <h2>5. Data Retention</h2>
+  <ul>
+    <li>Usage logs: retained for 90 days, then automatically deleted.</li>
+    <li>Account data: retained until you request deletion.</li>
+    <li>Feedback: retained indefinitely for product improvement (anonymized after 1 year).</li>
+  </ul>
+
+  <h2>6. Your Rights (GDPR)</h2>
+  <p>If you are in the EU/EEA, you have the right to:</p>
+  <ul>
+    <li><strong>Access:</strong> request a copy of your personal data.</li>
+    <li><strong>Rectification:</strong> correct inaccurate data.</li>
+    <li><strong>Erasure:</strong> request deletion of your account and all associated data.</li>
+    <li><strong>Portability:</strong> receive your data in a structured, machine-readable format.</li>
+    <li><strong>Objection:</strong> object to processing based on legitimate interests.</li>
+  </ul>
+
+  <h2>7. Privacy Mode (PII Scrubbing)</h2>
+  <p>Privacy Mode is OFF by default. When enabled, the extension automatically detects and replaces:</p>
+  <ul>
+    <li>Email addresses</li>
+    <li>Phone numbers</li>
+    <li>SSN-like patterns</li>
+  </ul>
+  <p>This happens locally in your browser before any data is sent to our servers. We recommend enabling Privacy Mode when extracting data from pages that may contain personal information.</p>
+
+  <h2>8. Children's Privacy</h2>
+  <p>Scuto is not intended for use by children under 13. We do not knowingly collect personal information from children.</p>
+
+  <h2>9. Changes to This Policy</h2>
+  <p>We may update this policy from time to time. Changes will be posted on this page with an updated date. Continued use of the extension after changes constitutes acceptance.</p>
+
+  <h2>10. Contact</h2>
+  <p>For privacy-related questions or data requests, contact us at: <a href="mailto:privacy@scuto.dev">privacy@scuto.dev</a></p>
+</body>
+</html>
