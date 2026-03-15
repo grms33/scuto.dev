@@ -3,50 +3,1267 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scuto - AI Web Scraper | Extract Data from Any Website</title>
-  <meta name="description" content="Extract structured data from any website using AI. Natural language queries, one-click extraction, CSV export. Free Chrome extension.">
+  <title>Scuto - GDPR-Safe AI Web Scraper | Extract Data from Any Website</title>
+  <meta name="description" content="The first GDPR-safe AI web scraper. Extract structured data from any website in plain English. PII scrubbing, CSV/JSON export, Google Sheets. Free Chrome extension.">
+  <meta name="keywords" content="web scraper, GDPR, AI scraper, data extraction, Chrome extension, no code, PII scrubbing">
+  <meta property="og:title" content="Scuto - GDPR-Safe AI Web Scraper">
+  <meta property="og:description" content="Extract structured data from any website using AI. Built-in GDPR compliance. Free Chrome extension.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://scuto.dev">
+  <meta property="og:image" content="https://scuto.dev/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Scuto - GDPR-Safe AI Web Scraper">
+  <meta name="twitter:description" content="Extract structured data from any website using AI. Built-in GDPR compliance. Free Chrome extension.">
+  <meta name="twitter:image" content="https://scuto.dev/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Scuto",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "offers": [
+      { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
+      { "@type": "Offer", "price": "9.99", "priceCurrency": "USD", "name": "Pro" },
+      { "@type": "Offer", "price": "29", "priceCurrency": "USD", "name": "Team" }
+    ],
+    "description": "GDPR-safe AI web scraper. Extract structured data from any website in plain English with built-in PII scrubbing.",
+    "url": "https://scuto.dev",
+    "installUrl": "https://chromewebstore.google.com/detail/scuto/ifpggadjcgodnlflkennoekpkkbdkckg",
+    "screenshot": "https://scuto.dev/og-image.png",
+    "softwareVersion": "1.0.0",
+    "creator": { "@type": "Organization", "name": "Scuto" }
+  }
+  </script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath d='M64 8L16 28v36c0 28.8 20.4 55.7 48 64 27.6-8.3 48-35.2 48-64V28L64 8z' fill='%23059669'/%3E%3Cpath d='M64 14L22 32v30c0 25.6 18 49.5 42 57 24-7.5 42-31.4 42-57V32L64 14z' fill='%230F172A'/%3E%3Crect x='36' y='42' width='56' height='6' rx='2' fill='%2310B981' opacity='.9'/%3E%3Crect x='36' y='54' width='40' height='6' rx='2' fill='%2310B981' opacity='.6'/%3E%3Crect x='36' y='66' width='48' height='6' rx='2' fill='%2310B981' opacity='.7'/%3E%3Crect x='36' y='78' width='36' height='6' rx='2' fill='%2310B981' opacity='.5'/%3E%3Cpath d='M52 94l8 8 16-16' stroke='%2310B981' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a1a; }
-    .hero { max-width: 720px; margin: 0 auto; padding: 4rem 1rem; text-align: center; }
-    h1 { font-size: 2.25rem; margin-bottom: 1rem; }
-    .subtitle { font-size: 1.125rem; color: #555; margin-bottom: 2rem; max-width: 560px; margin-left: auto; margin-right: auto; }
-    .cta { display: inline-block; padding: 0.75rem 2rem; background: #2563eb; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; font-size: 1rem; }
-    .cta:hover { background: #1d4ed8; }
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 720px; margin: 3rem auto; padding: 0 1rem; }
-    .feature { text-align: center; }
-    .feature h3 { font-size: 1rem; margin-bottom: 0.25rem; }
-    .feature p { font-size: 0.875rem; color: #666; }
-    footer { text-align: center; padding: 2rem 1rem; font-size: 0.875rem; color: #888; border-top: 1px solid #eee; }
-    footer a { color: #2563eb; margin: 0 0.5rem; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #020617;
+      --bg-card: #0f172a;
+      --bg-card-hover: #1e293b;
+      --border: #1e293b;
+      --border-hover: #334155;
+      --text: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --emerald: #10b981;
+      --emerald-dim: #059669;
+      --emerald-glow: rgba(16, 185, 129, 0.15);
+      --emerald-glow-strong: rgba(16, 185, 129, 0.25);
+      --max-w: 1120px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(2, 6, 23, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo svg { width: 28px; height: 28px; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--emerald) !important;
+      color: var(--bg) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      font-size: 0.8125rem !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { background: #34d399 !important; transform: translateY(-1px); }
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 10rem 1.5rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-content { max-width: 540px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--emerald-glow);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      color: var(--emerald);
+      padding: 0.375rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-badge svg { width: 14px; height: 14px; }
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      margin-bottom: 1.25rem;
+    }
+    h1 .highlight {
+      background: linear-gradient(135deg, var(--emerald), #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 460px;
+    }
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--emerald);
+      color: var(--bg);
+      padding: 0.875rem 1.75rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover { background: #34d399; transform: translateY(-2px); box-shadow: 0 8px 32px var(--emerald-glow-strong); }
+    .btn-primary svg { width: 18px; height: 18px; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text-secondary);
+      padding: 0.875rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); }
+    .hero-proof {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+    .hero-proof span { display: flex; align-items: center; gap: 0.375rem; }
+    .hero-proof svg { width: 14px; height: 14px; color: var(--emerald); }
+
+    /* HERO VISUAL */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-mockup {
+      width: 100%;
+      max-width: 480px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 32px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+    .mockup-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: rgba(15, 23, 42, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+    .mockup-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      opacity: 0.3;
+    }
+    .mockup-url {
+      flex: 1;
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 6px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.6875rem;
+      color: var(--text-muted);
+      margin-left: 0.5rem;
+    }
+    .mockup-body { padding: 1.25rem; }
+    .mockup-prompt {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: 8px;
+      padding: 0.625rem 0.875rem;
+      margin-bottom: 1rem;
+      font-size: 0.75rem;
+      color: var(--emerald);
+    }
+    .mockup-prompt-icon { opacity: 0.6; }
+    .mockup-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.6875rem;
+    }
+    .mockup-table th {
+      text-align: left;
+      padding: 0.5rem 0.625rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+    .mockup-table td {
+      padding: 0.5rem 0.625rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+    }
+    .mockup-table tr { animation: fadeRow 0.5s ease-out both; }
+    .mockup-table tr:nth-child(1) { animation-delay: 0.8s; }
+    .mockup-table tr:nth-child(2) { animation-delay: 1.0s; }
+    .mockup-table tr:nth-child(3) { animation-delay: 1.2s; }
+    .mockup-table tr:nth-child(4) { animation-delay: 1.4s; }
+    .mockup-table tr:nth-child(5) { animation-delay: 1.6s; }
+    .mockup-gdpr {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 6px;
+      padding: 0.375rem 0.625rem;
+      margin-top: 0.75rem;
+      font-size: 0.625rem;
+      color: var(--emerald);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    .mockup-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .mockup-btn {
+      padding: 0.375rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      border: none;
+      cursor: default;
+    }
+    .mockup-btn-primary { background: var(--emerald); color: var(--bg); }
+    .mockup-btn-secondary { background: var(--bg-card-hover); color: var(--text-secondary); border: 1px solid var(--border); }
+    .hero-glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--emerald-glow-strong) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    /* SECTION COMMON */
+    section { padding: 6rem 1.5rem; }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--emerald);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      font-size: 1.0625rem;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-header .section-desc { margin: 0 auto; }
+
+    /* TRUST BAR */
+    .trust {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+    }
+    .trust-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      text-align: center;
+    }
+    .trust-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+    .trust-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .trust-logo {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      opacity: 0.5;
+      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+    .trust-logo:hover { opacity: 0.8; }
+    .trust-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      opacity: 0.3;
+      flex-shrink: 0;
+    }
+
+    /* VALUE PROPS */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .value-card {
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: all 0.3s;
+    }
+    .value-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    }
+    .value-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--emerald-glow);
+      border-radius: 12px;
+      margin-bottom: 1.25rem;
+      color: var(--emerald);
+    }
+    .value-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .value-card p {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* HOW IT WORKS */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(33.33% / 2 + 36px);
+      right: calc(33.33% / 2 + 36px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--emerald), var(--emerald-dim), var(--emerald));
+      opacity: 0.3;
+    }
+    .step {
+      text-align: center;
+      position: relative;
+    }
+    .step-number {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 2px solid var(--emerald);
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--emerald);
+      position: relative;
+      z-index: 1;
+    }
+    .step h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .step p {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* FEATURES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .feature-card {
+      padding: 1.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: all 0.3s;
+    }
+    .feature-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--emerald-glow);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.375rem;
+      letter-spacing: -0.01em;
+    }
+    .feature-card p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .pricing-card {
+      padding: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s;
+    }
+    .pricing-card:hover { border-color: var(--border-hover); }
+    .pricing-card.popular {
+      border-color: var(--emerald);
+      box-shadow: 0 0 40px var(--emerald-glow);
+      position: relative;
+    }
+    .pricing-popular-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--emerald);
+      color: var(--bg);
+      padding: 0.25rem 1rem;
+      border-radius: 100px;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .pricing-name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+    .pricing-amount {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+    .pricing-period {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .pricing-desc {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.625rem;
+    }
+    .pricing-features li::before {
+      content: '';
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      background: var(--emerald);
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z'/%3E%3C/svg%3E") center/contain no-repeat;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z'/%3E%3C/svg%3E") center/contain no-repeat;
+      margin-top: 2px;
+    }
+    .pricing-cta {
+      display: block;
+      text-align: center;
+      padding: 0.75rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .pricing-cta-primary {
+      background: var(--emerald);
+      color: var(--bg);
+    }
+    .pricing-cta-primary:hover { background: #34d399; transform: translateY(-1px); }
+    .pricing-cta-secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    .pricing-cta-secondary:hover { border-color: var(--border-hover); color: var(--text); }
+    .pricing-credits {
+      text-align: center;
+      padding: 1.5rem 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .pricing-credits p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+    }
+    .pricing-credits strong { color: var(--text); }
+
+    /* FAQ */
+    .faq-list { max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 1.25rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: inherit;
+      transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--emerald); }
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .faq-answer-inner {
+      padding-bottom: 1.25rem;
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      text-align: center;
+      padding: 6rem 1.5rem;
+      position: relative;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, var(--emerald-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .cta-section p {
+      font-size: 1.0625rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+    }
+    .footer-left svg { width: 20px; height: 20px; }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8125rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-secondary); }
+
+    /* ANIMATIONS */
+    @keyframes fadeRow {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+    }
+    @keyframes scanLine {
+      0% { top: 0; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: calc(100% - 2px); opacity: 0; }
+    }
+    .scan-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--emerald), transparent);
+      box-shadow: 0 0 8px var(--emerald);
+      animation: scanLine 3s ease-in-out infinite;
+      z-index: 2;
+    }
+    /* Fade-in on scroll */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 1.5rem;
+        gap: 1rem;
+      }
+      .nav-mobile-toggle { display: block; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 7rem 1.5rem 3rem;
+        gap: 2.5rem;
+        text-align: center;
+      }
+      .hero-content { max-width: none; }
+      .hero-sub { margin: 0 auto 2rem; }
+      .hero-ctas { justify-content: center; flex-wrap: wrap; }
+      .hero-proof { justify-content: center; flex-wrap: wrap; }
+      .hero-visual { order: -1; }
+      .hero-mockup { max-width: 360px; }
+      .values-grid, .steps-grid, .features-grid, .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      .steps-grid::before { display: none; }
+      .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer-links { flex-wrap: wrap; justify-content: center; }
+      .trust-logos { gap: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 4rem 1rem; }
+      .hero { padding: 6rem 1rem 3rem; }
+    }
   </style>
 </head>
 <body>
-  <div class="hero">
-    <h1>Scuto</h1>
-    <p class="subtitle">Extract structured data from any website using AI. Ask in plain English, get clean tables. Export to CSV or JSON in one click.</p>
-    <a href="#" class="cta">Install from Chrome Web Store</a>
-  </div>
 
-  <div class="features">
-    <div class="feature">
-      <h3>Natural Language</h3>
-      <p>Ask for data in plain English. "Get all product prices" or "Extract restaurant ratings".</p>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 128 128" fill="none">
+        <path d="M64 8L16 28v36c0 28.8 20.4 55.7 48 64 27.6-8.3 48-35.2 48-64V28L64 8z" fill="#059669"/>
+        <path d="M64 14L22 32v30c0 25.6 18 49.5 42 57 24-7.5 42-31.4 42-57V32L64 14z" fill="#0F172A"/>
+        <rect x="36" y="42" width="56" height="6" rx="2" fill="#10B981" opacity=".9"/>
+        <rect x="36" y="54" width="40" height="6" rx="2" fill="#10B981" opacity=".6"/>
+        <rect x="36" y="66" width="48" height="6" rx="2" fill="#10B981" opacity=".7"/>
+        <rect x="36" y="78" width="36" height="6" rx="2" fill="#10B981" opacity=".5"/>
+        <path d="M52 94l8 8 16-16" stroke="#10B981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      Scuto
+    </a>
+    <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="https://chromewebstore.google.com/detail/scuto/ifpggadjcgodnlflkennoekpkkbdkckg" class="nav-cta">Add to Chrome</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+      GDPR-Safe by Design
     </div>
-    <div class="feature">
-      <h3>One-Click Extraction</h3>
-      <p>Smart site detection with contextual suggestions. Click and extract instantly.</p>
+    <h1>Extract any website.<br><span class="highlight">Privacy first.</span></h1>
+    <p class="hero-sub">AI-powered web scraper with built-in PII scrubbing. Describe what you need in plain English, get clean structured data. No code required.</p>
+    <div class="hero-ctas">
+      <a href="https://chromewebstore.google.com/detail/scuto/ifpggadjcgodnlflkennoekpkkbdkckg" class="btn-primary">
+        <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M21.17 8H12" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 20.5L12 12" stroke="currentColor" stroke-width="1.5"/><path d="M3.26 15.05L7.5 3.5" stroke="currentColor" stroke-width="1.5" opacity="0"/><path d="M2.83 8l4.67 8.08" stroke="currentColor" stroke-width="1.5"/></svg>
+        Add to Chrome - Free
+      </a>
+      <a href="#how" class="btn-secondary">See how it works</a>
     </div>
-    <div class="feature">
-      <h3>CSV + JSON Export</h3>
-      <p>Download results as CSV or copy JSON to clipboard. Ready for spreadsheets or code.</p>
+    <div class="hero-proof">
+      <span>
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        Chrome Web Store
+      </span>
+      <span>Free forever</span>
+      <span>20+ pre-configured sites</span>
     </div>
   </div>
+  <div class="hero-visual">
+    <div class="hero-glow"></div>
+    <div class="hero-mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dot"></div>
+        <div class="mockup-dot"></div>
+        <div class="mockup-dot"></div>
+        <div class="mockup-url">imdb.com/chart/top</div>
+      </div>
+      <div class="mockup-body" style="position:relative;">
+        <div class="scan-line"></div>
+        <div class="mockup-prompt">
+          <span class="mockup-prompt-icon">&#9889;</span>
+          "Extract movie title, duration, and rating"
+        </div>
+        <table class="mockup-table">
+          <thead>
+            <tr><th>Title</th><th>Duration</th><th>Rating</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Shawshank Redemption</td><td>2h 22m</td><td>9.3</td></tr>
+            <tr><td>The Godfather</td><td>2h 55m</td><td>9.2</td></tr>
+            <tr><td>The Dark Knight</td><td>2h 32m</td><td>9.0</td></tr>
+            <tr><td>12 Angry Men</td><td>1h 36m</td><td>9.0</td></tr>
+            <tr><td>Schindler's List</td><td>3h 15m</td><td>8.9</td></tr>
+          </tbody>
+        </table>
+        <div class="mockup-gdpr">
+          <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          GDPR COMPLIANT - 0 PII detected
+        </div>
+        <div class="mockup-actions">
+          <span class="mockup-btn mockup-btn-primary">CSV</span>
+          <span class="mockup-btn mockup-btn-secondary">JSON</span>
+          <span class="mockup-btn mockup-btn-secondary">Sheets</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-  <footer>
-    <a href="/privacy">Privacy Policy</a>
-    <a href="/terms">Terms of Service</a>
-    <span>contact@scuto.dev</span>
-  </footer>
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="trust-inner">
+    <p class="trust-label">Works on 20+ popular sites out of the box</p>
+    <div class="trust-logos">
+      <span class="trust-logo">Amazon</span>
+      <span class="trust-dot"></span>
+      <span class="trust-logo">LinkedIn</span>
+      <span class="trust-dot"></span>
+      <span class="trust-logo">eBay</span>
+      <span class="trust-dot"></span>
+      <span class="trust-logo">Airbnb</span>
+      <span class="trust-dot"></span>
+      <span class="trust-logo">Indeed</span>
+      <span class="trust-dot"></span>
+      <span class="trust-logo">Zillow</span>
+      <span class="trust-dot"></span>
+      <span class="trust-logo">Yelp</span>
+      <span class="trust-dot"></span>
+      <span class="trust-logo">IMDb</span>
+      <span class="trust-dot"></span>
+      <span class="trust-logo">GitHub</span>
+      <span class="trust-dot"></span>
+      <span class="trust-logo">Booking</span>
+    </div>
+  </div>
+</div>
+
+<!-- VALUE PROPS -->
+<section id="values">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Why Scuto</p>
+      <h2 class="section-title">The scraper that respects your data</h2>
+      <p class="section-desc">Most scrapers extract everything, including personal data. Scuto is different.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card fade-up">
+        <div class="value-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>No code, plain English</h3>
+        <p>Describe what you need: "Get all product prices and ratings". The AI handles selectors, pagination, and structure.</p>
+      </div>
+      <div class="value-card fade-up" style="transition-delay:0.1s">
+        <div class="value-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>GDPR safe by default</h3>
+        <p>Built-in PII scrubber detects and removes emails, phone numbers, and 8 categories of personal data before export.</p>
+      </div>
+      <div class="value-card fade-up" style="transition-delay:0.2s">
+        <div class="value-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <h3>Export anywhere</h3>
+        <p>Download as CSV, copy JSON to clipboard, or send to Google Sheets. Your data, your format, your workflow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" style="background: var(--bg-card);">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">How it works</p>
+      <h2 class="section-title">Three steps. Zero setup.</h2>
+      <p class="section-desc">Install, describe, export. That's it.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step fade-up">
+        <div class="step-number">1</div>
+        <h3>Open any website</h3>
+        <p>Navigate to any page you want to extract data from. Scuto detects the site and suggests what to extract.</p>
+      </div>
+      <div class="step fade-up" style="transition-delay:0.15s">
+        <div class="step-number">2</div>
+        <h3>Describe your data</h3>
+        <p>Type what you need in plain English. "Extract all product names and prices" or use one-click suggestions.</p>
+      </div>
+      <div class="step fade-up" style="transition-delay:0.3s">
+        <div class="step-number">3</div>
+        <h3>Export clean results</h3>
+        <p>Get structured data in a table. Download CSV, copy JSON, or push to Google Sheets. PII scrubbed automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Features</p>
+      <h2 class="section-title">Everything you need to extract data safely</h2>
+      <p class="section-desc">Powerful extraction with compliance built in, not bolted on.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 014 4v2a4 4 0 01-8 0V6a4 4 0 014-4z"/><path d="M16 14h.01"/><path d="M8 14h.01"/><rect x="4" y="10" width="16" height="10" rx="4"/><path d="M9 20v2"/><path d="M15 20v2"/></svg></div>
+        <h3>AI-powered extraction</h3>
+        <p>Gemini Flash + Claude Haiku analyze page structure and extract exactly what you describe. Smart fallback between models.</p>
+      </div>
+      <div class="feature-card fade-up" style="transition-delay:0.05s">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>PII scrubbing</h3>
+        <p>Automatic detection and removal of emails, phones, addresses, SSNs, and 8 categories of personal data. GDPR compliance reports included.</p>
+      </div>
+      <div class="feature-card fade-up" style="transition-delay:0.1s">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 21V3"/><path d="M16 21V3"/><path d="M2 12h20"/></svg></div>
+        <h3>Multi-page pagination</h3>
+        <p>Automatically follow pagination to extract complete datasets across multiple pages. No manual clicking required.</p>
+      </div>
+      <div class="feature-card fade-up" style="transition-delay:0.15s">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>Scheduled extractions</h3>
+        <p>Set up recurring scraping jobs to monitor prices, track changes, or build datasets over time. Runs automatically in the cloud.</p>
+      </div>
+      <div class="feature-card fade-up" style="transition-delay:0.2s">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div>
+        <h3>API + Webhooks</h3>
+        <p>Programmatic access via REST API. Connect to Zapier, Make, or your own systems with HMAC-signed webhooks.</p>
+      </div>
+      <div class="feature-card fade-up" style="transition-delay:0.25s">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>Team collaboration</h3>
+        <p>Share templates, extractions, and quotas across your team. Role-based access with admin, member, and viewer roles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background: var(--bg-card);">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-title">Start free. Scale when you need to.</h2>
+      <p class="section-desc">No credit card required. Upgrade or buy credits anytime.</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- FREE -->
+      <div class="pricing-card fade-up">
+        <p class="pricing-name">Free</p>
+        <div class="pricing-price">
+          <span class="pricing-amount">$0</span>
+        </div>
+        <p class="pricing-desc">5 extractions per day. Perfect for trying Scuto.</p>
+        <ul class="pricing-features">
+          <li>5 extractions / day</li>
+          <li>AI-powered extraction</li>
+          <li>20+ pre-configured sites</li>
+          <li>CSV + JSON export</li>
+          <li>PII scrubbing</li>
+          <li>Extraction history</li>
+        </ul>
+        <a href="https://chromewebstore.google.com/detail/scuto/ifpggadjcgodnlflkennoekpkkbdkckg" class="pricing-cta pricing-cta-secondary">Install Free</a>
+      </div>
+      <!-- PRO -->
+      <div class="pricing-card popular fade-up" style="transition-delay:0.1s">
+        <span class="pricing-popular-badge">Most Popular</span>
+        <p class="pricing-name">Pro</p>
+        <div class="pricing-price">
+          <span class="pricing-amount">$9.99</span>
+          <span class="pricing-period">/month</span>
+        </div>
+        <p class="pricing-desc">100 extractions per day. For freelancers and solopreneurs.</p>
+        <ul class="pricing-features">
+          <li>100 extractions / day</li>
+          <li>Everything in Free</li>
+          <li>Multi-page pagination</li>
+          <li>Google Sheets export</li>
+          <li>Scheduled extractions</li>
+          <li>Templates</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="https://chromewebstore.google.com/detail/scuto/ifpggadjcgodnlflkennoekpkkbdkckg" class="pricing-cta pricing-cta-primary">Start with Pro</a>
+      </div>
+      <!-- TEAM -->
+      <div class="pricing-card fade-up" style="transition-delay:0.2s">
+        <p class="pricing-name">Team</p>
+        <div class="pricing-price">
+          <span class="pricing-amount">$29</span>
+          <span class="pricing-period">/month</span>
+        </div>
+        <p class="pricing-desc">500 extractions per day. For teams and agencies.</p>
+        <ul class="pricing-features">
+          <li>500 extractions / day</li>
+          <li>Everything in Pro</li>
+          <li>Team collaboration</li>
+          <li>API + Webhooks</li>
+          <li>Page monitoring</li>
+          <li>Compliance reports</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="https://chromewebstore.google.com/detail/scuto/ifpggadjcgodnlflkennoekpkkbdkckg" class="pricing-cta pricing-cta-secondary">Start with Team</a>
+      </div>
+    </div>
+    <div class="pricing-credits fade-up">
+      <p>Need more flexibility? Buy <strong>credit packs</strong>: <strong>100 credits for $5</strong> or <strong>300 credits for $15</strong>. Credits never expire.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-title">Common questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open'); const a=this.nextElementSibling; a.style.maxHeight=a.style.maxHeight?'':a.scrollHeight+'px';">
+          What makes Scuto different from other scrapers?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-inner">Scuto is the first AI web scraper with built-in GDPR compliance. While other tools extract everything, including personal data, Scuto automatically detects and scrubs PII (emails, phone numbers, addresses, and 8 categories of personal data) before you export. Your data stays clean and compliant by default.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open'); const a=this.nextElementSibling; a.style.maxHeight=a.style.maxHeight?'':a.scrollHeight+'px';">
+          Why does Scuto need "access to all websites"?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-inner">Scuto is a universal web scraper, so it needs to read page content on any website you visit. This permission is only used when you actively trigger an extraction. Scuto never collects data in the background, never tracks your browsing, and never sends raw HTML to external servers. The AI processes a cleaned, anonymized version of the page.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open'); const a=this.nextElementSibling; a.style.maxHeight=a.style.maxHeight?'':a.scrollHeight+'px';">
+          What websites can I scrape?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-inner">Scuto works on any website. It comes with 20+ pre-configured sites (Amazon, eBay, LinkedIn Jobs, Airbnb, Indeed, Zillow, and more) for one-click extraction. For any other site, just describe what data you need in plain English, and the AI will figure out the structure.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open'); const a=this.nextElementSibling; a.style.maxHeight=a.style.maxHeight?'':a.scrollHeight+'px';">
+          Is my data stored on your servers?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-inner">No raw page data is stored on our servers. The page content is cleaned and converted to a minimal format (removing scripts, ads, and personal data) before being sent to the AI for structure analysis. The AI response (your extracted data) is returned directly to your browser. We only store usage metadata (extraction count, timestamps) for quota management.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open'); const a=this.nextElementSibling; a.style.maxHeight=a.style.maxHeight?'':a.scrollHeight+'px';">
+          Can I use Scuto for free?
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p class="faq-answer-inner">Yes. The free plan gives you 5 extractions per day, forever. No credit card required. This includes AI-powered extraction, 20+ pre-configured sites, CSV/JSON export, and PII scrubbing. Upgrade to Pro ($9.99/mo) for 100 extractions/day, or buy credit packs for flexible usage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="cta-section">
+  <h2>Start extracting data. <span style="color:var(--emerald)">Safely.</span></h2>
+  <p>Free forever. No credit card. Install in 10 seconds.</p>
+  <a href="https://chromewebstore.google.com/detail/scuto/ifpggadjcgodnlflkennoekpkkbdkckg" class="btn-primary" style="font-size:1.0625rem; padding:1rem 2.25rem;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+    Add to Chrome - Free
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <svg viewBox="0 0 128 128" fill="none" width="20" height="20">
+        <path d="M64 8L16 28v36c0 28.8 20.4 55.7 48 64 27.6-8.3 48-35.2 48-64V28L64 8z" fill="#059669"/>
+        <path d="M64 14L22 32v30c0 25.6 18 49.5 42 57 24-7.5 42-31.4 42-57V32L64 14z" fill="#0F172A"/>
+        <rect x="36" y="42" width="56" height="6" rx="2" fill="#10B981" opacity=".9"/>
+        <rect x="36" y="54" width="40" height="6" rx="2" fill="#10B981" opacity=".6"/>
+        <rect x="36" y="66" width="48" height="6" rx="2" fill="#10B981" opacity=".7"/>
+        <rect x="36" y="78" width="36" height="6" rx="2" fill="#10B981" opacity=".5"/>
+        <path d="M52 94l8 8 16-16" stroke="#10B981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      &copy; 2026 Scuto. All rights reserved.
+    </div>
+    <ul class="footer-links">
+      <li><a href="/privacy">Privacy Policy</a></li>
+      <li><a href="/terms">Terms of Service</a></li>
+      <li><a href="mailto:contact@scuto.dev">Contact</a></li>
+      <li><a href="https://chromewebstore.google.com/detail/scuto/ifpggadjcgodnlflkennoekpkkbdkckg">Chrome Web Store</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- SCROLL ANIMATIONS -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
